@@ -1,4 +1,5 @@
 using BlogAPI;
+using Data.InitialDB;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,5 +20,15 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+try
+{
+    ////Add admin user to DB if not exists.
+    await InitialDB.SeedUserAsync();
+}
+catch (Exception ex)
+{
+    ////Log exception
+}
 
 app.Run();
