@@ -18,9 +18,7 @@ namespace Domain
         public string? UserName { get; set; }
         public string? Email { get; set; }
         public string? Password { get; set; }
-        public string? Image { get; set; }
-        public int? Status { get; set; }
-        public int? Kind { get; set; }
-        public DateTime? Created_at { get; set; }
+        public int? RoleId { get; set; }
+        public bool? Deleted { get; set; }
     }
 }
