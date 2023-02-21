@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 var startup = new Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services);
 
-builder.Services.AddDbContext<BlogContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Postgre")));
+builder.Services.AddDbContext<BlogContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Postgre"), b => b.MigrationsAssembly("Data")));
 
 var app = builder.Build();
 
