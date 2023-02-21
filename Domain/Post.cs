@@ -9,11 +9,8 @@ namespace Domain
         [Key]
         public int Id { get; set; }
         public string? Title { get; set; }
-        public string? Brief { get; set; }
         public string? Content { get; set; }
-        public string? Image { get; set; }
-        public DateTime? Created_at { get; set; }
-        public int? Status { get; set; }
+        public DateTime? Created_date { get; set; }
         public int Category_id { get; set; }
         public int User_id { get; set; }
     }
