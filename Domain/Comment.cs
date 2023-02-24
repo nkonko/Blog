@@ -10,9 +10,9 @@ namespace Domain
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Content { get; set; }
-        public string? Email { get; set; }
+        public DateTime? Created { get; set; }
+        public string? Status { get; set; }
         public int Post_id { get; set; }
-        public DateTime? Created_at { get; set; }
-        public int? Status { get; set; }
+        public int? User_id { get; set; }
     }
 }
