@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Domain
 {
     [Table("User")]
-    public class User
+    public class User : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public string? Name { get; set; }
         public string? LastName { get; set; }
         public string? UserName { get; set; }
