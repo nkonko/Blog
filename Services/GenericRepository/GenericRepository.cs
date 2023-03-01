@@ -3,36 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data.Context;
+using Data.AppContext;
+using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services.GenericRepository
 {
-	public class GenericRepository<T> : IGenericRepository<T> where T : class
+	public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 	{
 		private readonly BlogContext blogContext;
-		public async Task<T> Delete(int id)
+
+		public GenericRepository(BlogContext blogContext)
 		{
-			throw new NotImplementedException();
+			this.blogContext = blogContext;
+		}
+		public void Add(T entity)
+		{
+			this.blogContext.Set<T>().Add(entity);
 		}
 
-		public async Task<IEnumerable<T>> GetAll()
+		public void Delete(T entity)
 		{
-			throw new NotImplementedException();
+			this.blogContext.Set<T>().Remove(entity);
+		}
+
+		public async Task<IReadOnlyList<T>> GetAll()
+		{
+			return await this.blogContext.Set<T>().ToListAsync();
 		}
 
 		public async Task<T> GetById(int id)
 		{
-			throw new NotImplementedException();
+			return await this.blogContext.Set<T>().FindAsync(id);
 		}
 
-		public async Task<T> Insert(T entity)
+		public void Update(T entity)
 		{
-			throw new NotImplementedException();
-		}
-
-		public async Task<T> Update(T entity)
-		{
-			throw new NotImplementedException();
+			this.blogContext.Set<T>().Attach(entity);
+			this.blogContext.Entry(entity).State = EntityState.Modified;
 		}
 	}
 }

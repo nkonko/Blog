@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using Domain;
 
 namespace Services.GenericRepository
 {
-	public interface IGenericRepository<T> where T : class
+	public interface IGenericRepository<T> where T : BaseEntity
 	{
-		Task<IEnumerable<T>> GetAll();
+		void Add(T entity);
+		void Update(T entity);
+		void Delete(T entity);
+		Task<IReadOnlyList<T>> GetAll();
 		Task<T> GetById(int id);
 		Task<T> Insert(T entity);
 		Task<T> Update(T entity);
