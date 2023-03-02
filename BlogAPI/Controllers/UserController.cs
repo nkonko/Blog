@@ -24,8 +24,7 @@ namespace BlogAPI.Controllers
 
 		public ActionResult<User> PostUser(User user)
 		{
-			this.genericRepository.Insert(user);
-			//this.genericRepository.SaveChangesAsync();
+			this.genericRepository.Add(user);
 
 			return user;
 		}
