@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data.AppContext;
+﻿using Data.AppContext;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,12 +15,16 @@ namespace Services.GenericRepository
 		public void Add(T entity)
 		{
 			this.blogContext.Set<T>().Add(entity);
-		}
+            this.blogContext.Entry(entity).State = EntityState.Added;
+			this.blogContext.SaveChangesAsync();
+        }
 
 		public void Delete(T entity)
 		{
 			this.blogContext.Set<T>().Remove(entity);
-		}
+            this.blogContext.Entry(entity).State = EntityState.Deleted;
+            this.blogContext.SaveChangesAsync();
+        }
 
 		public IReadOnlyList<T> GetAll()
 		{
@@ -42,6 +41,7 @@ namespace Services.GenericRepository
 		{
 			this.blogContext.Set<T>().Attach(entity);
 			this.blogContext.Entry(entity).State = EntityState.Modified;
-		}
+            this.blogContext.SaveChangesAsync();
+        }
 	}
 }

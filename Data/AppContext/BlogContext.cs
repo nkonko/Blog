@@ -8,7 +8,6 @@ namespace Data.AppContext
 	{
 		public BlogContext(DbContextOptions<BlogContext> options) : base(options)
 		{
-
 		}
 
 		public DbSet<User> Users { get; set; }
