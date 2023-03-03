@@ -27,14 +27,15 @@ namespace Services.GenericRepository
 			this.blogContext.Set<T>().Remove(entity);
 		}
 
-		public async Task<IReadOnlyList<T>> GetAll()
+		public IReadOnlyList<T> GetAll()
 		{
-			return await this.blogContext.Set<T>().ToListAsync();
+			return this.blogContext.Set<T>().ToList();
+
 		}
 
-		public async Task<T> GetById(int id)
+		public T GetById(int id)
 		{
-			return await this.blogContext.Set<T>().FindAsync(id);
+			return this.blogContext.Set<T>().Find(id)!;
 		}
 
 		public void Update(T entity)

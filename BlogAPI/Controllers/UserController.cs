@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Microsoft.AspNetCore.Mvc;
+using Services;
 using Services.GenericRepository;
 
 namespace BlogAPI.Controllers
@@ -7,27 +8,31 @@ namespace BlogAPI.Controllers
 	public class UserController : BaseApiController
 	{
 		private readonly IGenericRepository<User> genericRepository;
+		private readonly IUserService userService;
 
-		public UserController(IGenericRepository<User> genericRepository)
+		public UserController(IGenericRepository<User> genericRepository, IUserService userService)
 		{
 			this.genericRepository = genericRepository;
+			this.userService = userService;
 		}
 
 		[HttpGet]
-
-		public async Task<ActionResult<User>> GetUserById(int id)
+		public ActionResult<User> GetUserById(int id)
 		{
-			return await genericRepository.GetById(id);
+			return genericRepository.GetById(id);
 		}
 
 		[HttpPost]
-
 		public ActionResult<User> PostUser(User user)
 		{
-			this.genericRepository.Insert(user);
-			//this.genericRepository.SaveChangesAsync();
-
+			this.genericRepository.Add(user);
 			return user;
+		}
+
+		[HttpPost]
+		public ActionResult<bool> Login(string userName, string password)
+		{
+			return userService.Login(userName, password);
 		}
 	}
 }

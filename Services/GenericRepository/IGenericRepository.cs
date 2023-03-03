@@ -12,7 +12,7 @@ namespace Services.GenericRepository
 		void Add(T entity);
 		void Update(T entity);
 		void Delete(T entity);
-		Task<IReadOnlyList<T>> GetAll();
-		Task<T> GetById(int id);
+		IReadOnlyList<T> GetAll();
+		T GetById(int id);
 	}
 }
