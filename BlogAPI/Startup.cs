@@ -2,6 +2,7 @@
 using Data.AppContext;
 using Domain;
 using Microsoft.EntityFrameworkCore.Design;
+using Services;
 using Services.GenericRepository;
 
 namespace BlogAPI
@@ -18,7 +19,8 @@ namespace BlogAPI
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddScoped<IDesignTimeDbContextFactory<BlogContext>, BlogContextFactory>();
-			services.AddScoped<IGenericRepository<User>, GenericRepository<User>>(); 
+			services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
+			services.AddScoped<IUserService, UserService>();
 			////services.AddDbContext<PUT DB CONTEXT HERE>(x => x.UseNpgsql(configuration.GetConnectionString("Postgre")));
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			services.AddControllers();

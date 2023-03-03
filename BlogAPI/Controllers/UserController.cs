@@ -17,12 +17,15 @@ namespace BlogAPI.Controllers
 		}
 
 		[HttpGet]
+		[Route("GetUserById")]
+
 		public ActionResult<User> GetUserById(int id)
 		{
 			return genericRepository.GetById(id);
 		}
 
 		[HttpPost]
+		[Route("PostUser")]
 		public ActionResult<User> PostUser(User user)
 		{
 			this.genericRepository.Add(user);
@@ -30,6 +33,7 @@ namespace BlogAPI.Controllers
 		}
 
 		[HttpPost]
+		[Route("Login")]
 		public ActionResult<bool> Login(string userName, string password)
 		{
 			return userService.Login(userName, password);

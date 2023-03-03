@@ -2,7 +2,7 @@
 
 namespace BlogAPI.Controllers
 {
-    public class AuthenticationController : BaseApiController
+    public class AuthenticationController
     {
 
 
