@@ -18,7 +18,7 @@ namespace BlogAPI
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddScoped<IDesignTimeDbContextFactory<BlogContext>, BlogContextFactory>();
-			services.AddScoped<IGenericRepository<User>, GenericRepository<User>>(); 
+			services.AddScoped<IGenericRepository<User>, GenericRepository<User>>();
 			////services.AddDbContext<PUT DB CONTEXT HERE>(x => x.UseNpgsql(configuration.GetConnectionString("Postgre")));
 			services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 			services.AddControllers();
