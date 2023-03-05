@@ -21,7 +21,7 @@ namespace BlogAPI.Controllers
 
 		public ActionResult<User> GetUserById(int id)
 		{
-			return genericRepository.GetById(id);
+			return this.genericRepository.GetById(id);
 		}
 
 		[HttpPost]
@@ -29,6 +29,7 @@ namespace BlogAPI.Controllers
 		public ActionResult<User> PostUser(User user)
 		{
 			this.genericRepository.Add(user);
+
 			return user;
 		}
 
@@ -36,7 +37,29 @@ namespace BlogAPI.Controllers
 		[Route("Login")]
 		public ActionResult<bool> Login(string userName, string password)
 		{
-			return userService.Login(userName, password);
+			return this.userService.Login(userName, password);
+		}
+
+		[HttpPut]
+		[Route("UpadteUser")]
+		public void PutUser(User user)
+		{
+			this.genericRepository.Update(user);
+		}
+
+		[HttpDelete]
+		[Route("DeleteUser")]
+		public ActionResult DeleteUser(int userId)
+		{
+			this.userService.LogicDelete(userId);
+			return Ok();
+		}
+
+		[HttpGet]
+		[Route("GetAllUser")]
+		public ActionResult<List<User>> GetAllUser()
+		{
+			return this.genericRepository.GetAll();
 		}
 	}
 }

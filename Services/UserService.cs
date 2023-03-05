@@ -1,5 +1,6 @@
 ﻿using Data.AppContext;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 using Services.GenericRepository;
 
 namespace Services
@@ -11,6 +12,17 @@ namespace Services
 		public UserService(IGenericRepository<User> genericRepository)
 		{
 			this.genericRepository = genericRepository;
+		}
+
+		public void LogicDelete(int userId)
+		{
+			var user = this.genericRepository.GetById(userId);
+
+			if (user != null)
+			{
+				user.Deleted = true;
+				genericRepository.Update(user);
+			}
 		}
 
 		public bool Login(string userName, string password)
@@ -30,7 +42,7 @@ namespace Services
 					return response;
 				}
 
-				////**** AGREGAR LOG PARA INDICAR QUE HUBO UN INTENTO DE SESION CON UN USUARIO INCORRECTO***//// 
+				////**** AGREGAR LOG PARA INDICAR QUE HUBO UN INTENTO DE SESION CON UN USUARIO INCORRECTO ***//// 
 
 				return null;
 
