@@ -1,7 +1,6 @@
 ﻿using Data.AppContext;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Services.GenericRepository
 {
