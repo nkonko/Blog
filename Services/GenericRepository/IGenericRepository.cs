@@ -9,8 +9,8 @@ namespace Services.GenericRepository
 		void Update(T entity);
 
 		void Delete(T entity);
-
-		IReadOnlyList<T> GetAll();
+		
+		List<T> GetAll();
 
 		T GetById(int id);
 	}
