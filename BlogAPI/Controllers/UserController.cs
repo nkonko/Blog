@@ -1,7 +1,7 @@
 ﻿using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Services;
 using Services.GenericRepository;
+using Services.Services;
 
 namespace BlogAPI.Controllers
 {
@@ -18,7 +18,6 @@ namespace BlogAPI.Controllers
 
 		[HttpGet]
 		[Route("GetUserById")]
-
 		public ActionResult<User> GetUserById(int id)
 		{
 			return this.genericRepository.GetById(id);

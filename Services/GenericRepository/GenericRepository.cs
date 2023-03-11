@@ -20,8 +20,9 @@ namespace Services.GenericRepository
 			this.blogContext.SaveChangesAsync();
 		}
 
-		public void Delete(T entity)
+		public void Delete(int id)
 		{
+			var entity = GetById(id);
 			this.blogContext.Set<T>().Remove(entity);
 			this.blogContext.Entry(entity).State = EntityState.Deleted;
 			this.blogContext.SaveChangesAsync();
