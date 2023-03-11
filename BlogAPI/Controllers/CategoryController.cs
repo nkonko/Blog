@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Services.GenericRepository;
 
@@ -30,16 +31,18 @@ namespace BlogAPI.Controllers
 
 		[HttpPut]
 		[Route("UpdateCategory")]
-		public void UpdateCategory(Category category)
+		public ActionResult UpdateCategory(Category category)
 		{
 			this.genericRepository.Update(category);
+			return Ok();
 		}
 
 		[HttpDelete]
 		[Route("DeleteCategory")]
-		public void DeleteCategory(int id)
+		public ActionResult DeleteCategory(int id)
 		{
 			this.genericRepository.Delete(id);
+			return Ok();
 		}
 	}
 }

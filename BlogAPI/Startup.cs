@@ -7,7 +7,7 @@ using Services.Services;
 
 namespace BlogAPI
 {
-    public class Startup
+	public class Startup
 	{
 		private readonly IConfiguration configuration;
 

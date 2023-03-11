@@ -41,9 +41,10 @@ namespace BlogAPI.Controllers
 
 		[HttpPut]
 		[Route("UpadteUser")]
-		public void PutUser(User user)
+		public ActionResult PutUser(User user)
 		{
 			this.genericRepository.Update(user);
+			return Ok();
 		}
 
 		[HttpDelete]
