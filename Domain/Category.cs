@@ -3,11 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
 {
-    [Table("Category")]
-    public class Category
-    {
-        [Key]
-        public int Id { get; set; }
-        public string? Name { get; set; }
-    }
+	[Table("Category")]
+	public class Category : BaseEntity
+	{
+		public string? Name { get; set; }
+	}
 }

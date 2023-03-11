@@ -1,7 +1,7 @@
 ﻿using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Services;
 using Services.GenericRepository;
+using Services.Services;
 
 namespace BlogAPI.Controllers
 {
@@ -18,7 +18,6 @@ namespace BlogAPI.Controllers
 
 		[HttpGet]
 		[Route("GetUserById")]
-
 		public ActionResult<User> GetUserById(int id)
 		{
 			return this.genericRepository.GetById(id);
@@ -42,9 +41,10 @@ namespace BlogAPI.Controllers
 
 		[HttpPut]
 		[Route("UpadteUser")]
-		public void PutUser(User user)
+		public ActionResult PutUser(User user)
 		{
 			this.genericRepository.Update(user);
+			return Ok();
 		}
 
 		[HttpDelete]
