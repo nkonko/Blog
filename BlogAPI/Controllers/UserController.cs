@@ -1,7 +1,9 @@
-﻿using Domain;
+﻿using Data.Encryption;
+using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Services.GenericRepository;
 using Services.Services;
+using System.Security.Cryptography;
 
 namespace BlogAPI.Controllers
 {
@@ -27,6 +29,13 @@ namespace BlogAPI.Controllers
 		[Route("PostUser")]
 		public ActionResult<User> PostUser(User user)
 		{
+			var loginList = new List<string>();
+			loginList.Add(user.UserName!);
+			loginList.Add(user.Password!);
+			var result = Encrypt.GetSHA1(loginList);
+			user.UserName = result[0];
+			user.Password = result[1];
+
 			this.genericRepository.Add(user);
 
 			return user;
@@ -36,7 +45,13 @@ namespace BlogAPI.Controllers
 		[Route("Login")]
 		public ActionResult<bool> Login(string userName, string password)
 		{
-			return this.userService.Login(userName, password);
+            var loginList = new List<string>();
+            loginList.Add(userName);
+            loginList.Add(password);
+            var result = Encrypt.GetSHA1(loginList);
+            userName = result[0];
+            password = result[1];
+            return this.userService.Login(userName, password);
 		}
 
 		[HttpPut]
