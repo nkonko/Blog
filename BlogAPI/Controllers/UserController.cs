@@ -28,27 +28,22 @@ namespace BlogAPI.Controllers
 		[HttpPost]
 		[Route("PostUser")]
 		public ActionResult<User> PostUser(User user)
-		{
-			var loginList = new List<string>();
-			loginList.Add(user.UserName!);
-			loginList.Add(user.Password!);
-			var result = Encrypt.GetSHA1(loginList);
-			user.UserName = result[0];
-			user.Password = result[1];
+        {
+            var result = GetEncryptation(user.UserName!, user.Password!);
+            user.UserName = result[0];
+            user.Password = result[1];
 
-			this.genericRepository.Add(user);
+            this.genericRepository.Add(user);
 
-			return user;
-		}
+            return user;
+        }
 
-		[HttpPost]
+
+        [HttpPost]
 		[Route("Login")]
 		public ActionResult<bool> Login(string userName, string password)
 		{
-            var loginList = new List<string>();
-            loginList.Add(userName);
-            loginList.Add(password);
-            var result = Encrypt.GetSHA1(loginList);
+			var result = GetEncryptation(userName, password);
             userName = result[0];
             password = result[1];
             return this.userService.Login(userName, password);
@@ -76,5 +71,14 @@ namespace BlogAPI.Controllers
 		{
 			return this.genericRepository.GetAll();
 		}
+        private List<string> GetEncryptation(string userName, string password)
+        {
+            var loginList = new List<string>();
+            loginList.Add(userName);
+            loginList.Add(password);
+            var result = Encrypt.GetSHA1(loginList);
+            return result;
+        }
+		
 	}
 }

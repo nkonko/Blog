@@ -5,17 +5,6 @@ namespace Data.Encryption
 {
     public class Encrypt
     {
-        //public static string ToHash(string input, HashAlgorithm algorithm)
-        //{
-        //    var bytes = algorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
-        //    var builder = new StringBuilder();
-        //    for (int i = 0; i < bytes.Length; i++)
-        //    {
-        //        builder.Append(bytes[i].ToString("X2"));
-        //    }
-        //    return builder.ToString();
-        //}
-
         public static List<string> GetSHA1(List<string> loginData)
         {
             var dataList = new List<string>();
@@ -26,8 +15,14 @@ namespace Data.Encryption
                 var encoding = new ASCIIEncoding();
                 byte[] stream = null;
                 var sb = new StringBuilder();
+
                 stream = sha1.ComputeHash(encoding.GetBytes(data));
-                for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+
+                for (int i = 0; i < stream.Length; i++)
+                {
+                    sb.AppendFormat("{0:x2}", stream[i]);
+                }
+                
                 sb.ToString();
 
                 dataList.Add(sb.ToString());
